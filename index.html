@@ -17,6 +17,8 @@
       color: #09090B;
       line-height: 1.6;
       overflow-x: hidden;
+      /* Cat paw cursor! */
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23333' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, auto;
     }
 
     /* ========== Typography ========== */
@@ -25,11 +27,12 @@
     /* ========== Navigation ========== */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250, 250, 250, 0.85);
+      background: rgba(250, 250, 250, 0.88);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23333' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, auto;
     }
     .nav-inner {
       max-width: 1100px; margin: 0 auto; padding: 0 24px;
@@ -38,14 +41,53 @@
     .nav-logo {
       font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 700;
       color: #09090B; text-decoration: none; letter-spacing: -0.03em;
+      display: flex; align-items: center; gap: 6px;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%232563EB' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, pointer;
     }
     .nav-logo span { color: #2563EB; }
+    .nav-logo .cat-logo { width: 20px; height: 20px; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a {
       font-size: 14px; font-weight: 500; color: #52525B;
-      text-decoration: none; transition: color 0.2s ease; cursor: pointer;
+      text-decoration: none; transition: color 0.2s ease;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%232563EB' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, pointer;
     }
     .nav-links a:hover { color: #2563EB; }
+
+    /* ========== Cat Decorations (line-drawing style) ========== */
+    .cat-deco {
+      position: absolute; pointer-events: none; opacity: 0.12;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 0;
+    }
+    .cat-deco:hover { opacity: 0.35; transform: scale(1.15); }
+    .cat-deco.cat-deco-lg { width: 100px; height: 100px; }
+    .cat-deco.cat-deco-md { width: 60px; height: 60px; opacity: 0.08; }
+    .cat-deco.cat-deco-sm { width: 36px; height: 36px; opacity: 0.06; }
+
+    /* Floating animation for cats */
+    @keyframes floatCat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+    @keyframes floatCatReverse {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(-3deg); }
+    }
+    .cat-float-1 { animation: floatCat 5s ease-in-out infinite; }
+    .cat-float-2 { animation: floatCatReverse 6s ease-in-out infinite 0.5s; }
+    .cat-float-3 { animation: floatCat 7s ease-in-out infinite 1s; }
+    .cat-float-4 { animation: floatCatReverse 5.5s ease-in-out infinite 1.5s; }
+
+    /* Hero Cat - special glow version */
+    .hero-cat {
+      position: absolute; pointer-events: none;
+      opacity: 0.08; filter: drop-shadow(0 0 8px rgba(37,99,235,0.15));
+      z-index: 0;
+    }
+    .hero-cat.hero-cat-left { left: 6%; top: 28%; animation: floatCat 6s ease-in-out infinite; }
+    .hero-cat.hero-cat-right { right: 8%; bottom: 30%; animation: floatCatReverse 7s ease-in-out infinite 0.8s; }
+    .hero-cat svg { width: 140px; height: 140px; }
 
     /* ========== Hero ========== */
     .hero {
@@ -55,7 +97,7 @@
     }
     .hero::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; max-width: 640px; }
@@ -76,8 +118,10 @@
     .hero-tagline {
       font-size: clamp(17px, 2.5vw, 21px); font-weight: 300;
       color: #52525B; margin-bottom: 10px; letter-spacing: -0.01em;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
       opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards;
     }
+    .hero-tagline .tagline-cat { width: 26px; height: 26px; vertical-align: middle; }
     .hero-bio {
       font-size: 15px; color: #71717A; max-width: 480px; margin: 0 auto 36px;
       opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards;
@@ -86,7 +130,8 @@
     .btn {
       display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px;
       border-radius: 12px; font-size: 14px; font-weight: 500; text-decoration: none;
-      transition: all 0.25s ease; cursor: pointer; border: none;
+      transition: all 0.25s ease; cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, pointer;
+      border: none;
     }
     .btn-primary {
       background: #18181B; color: #fff;
@@ -106,18 +151,21 @@
       color: #A1A1AA; font-size: 12px; letter-spacing: 0.08em;
       opacity: 0; animation: fadeIn 0.6s ease 0.8s forwards;
     }
+    .scroll-hint .scroll-hint-cat { width: 18px; height: 18px; }
     .scroll-line {
       width: 1px; height: 36px; background: linear-gradient(to bottom, #D4D4D8, transparent);
       animation: scrollPulse 2s ease-in-out infinite;
     }
 
     /* ========== Sections Common ========== */
-    section { padding: 96px 24px; }
-    .section-inner { max-width: 900px; margin: 0 auto; }
+    section { padding: 96px 24px; position: relative; }
+    .section-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
     .section-label {
       font-size: 12px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.15em; color: #2563EB; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
     }
+    .section-label .label-cat { width: 18px; height: 18px; }
     .section-title {
       font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; color: #18181B;
     }
@@ -130,7 +178,8 @@
     .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .stat-card {
       background: #FAFAFA; border: 1px solid #F4F4F5; border-radius: 16px;
-      padding: 24px; text-align: center; transition: all 0.25s ease; cursor: default;
+      padding: 24px; text-align: center; transition: all 0.25s ease;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23333' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, default;
     }
     .stat-card:hover { border-color: #E4E4E7; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); transform: translateY(-2px); }
     .stat-num { font-family: 'Archivo', sans-serif; font-size: 32px; font-weight: 700; color: #18181B; }
@@ -171,7 +220,8 @@
     }
     .skill-card {
       background: #FAFAFA; border: 1px solid #F4F4F5; border-radius: 16px;
-      padding: 28px 24px; transition: all 0.28s ease; cursor: default;
+      padding: 28px 24px; transition: all 0.28s ease;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23333' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, default;
       opacity: 0; transform: translateY(20px);
     }
     .skill-card.visible { opacity: 1; transform: translateY(0); }
@@ -203,7 +253,8 @@
       display: flex; align-items: center; gap: 16px;
       background: #fff; border: 1px solid #E4E4E7; border-radius: 14px;
       padding: 20px 24px; text-decoration: none; color: inherit;
-      transition: all 0.25s ease; cursor: pointer;
+      transition: all 0.25s ease;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%232563EB' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='32' cy='44' rx='14' ry='16'/%3E%3Cellipse cx='18' cy='22' rx='7' ry='9' transform='rotate(-25 18 22)'/%3E%3Cellipse cx='46' cy='22' rx='7' ry='9' transform='rotate(25 46 22)'/%3E%3Cellipse cx='10' cy='34' rx='6' ry='8' transform='rotate(-45 10 34)'/%3E%3Cellipse cx='54' cy='34' rx='6' ry='8' transform='rotate(45 54 34)'/%3E%3C/g%3E%3C/svg%3E") 12 12, pointer;
       opacity: 0; transform: translateY(16px);
     }
     .link-card.visible { opacity: 1; transform: translateY(0); }
@@ -225,7 +276,9 @@
     footer {
       text-align: center; padding: 40px 24px;
       border-top: 1px solid #F4F4F5; color: #A1A1AA; font-size: 13px;
+      position: relative;
     }
+    footer .footer-cat { width: 20px; height: 20px; vertical-align: middle; display: inline-block; }
     footer a { color: #71717A; text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: #2563EB; }
 
@@ -246,6 +299,26 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(.22, 1, .36, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ========== Heart Click Effect ========== */
+    .heart-particle {
+      position: fixed; pointer-events: none; z-index: 99999;
+      font-size: 16px; user-select: none;
+      animation: heartFloat 1s ease-out forwards;
+    }
+    @keyframes heartFloat {
+      0% { opacity: 1; transform: scale(0.3) translateY(0) rotate(0deg); }
+      25% { opacity: 1; transform: scale(1.2) translateY(-16px) rotate(-10deg); }
+      50% { opacity: 0.85; transform: scale(1) translateY(-30px) rotate(5deg); }
+      100% { opacity: 0; transform: scale(0.6) translateY(-55px) rotate(-5deg); }
+    }
+    .heart-mini {
+      font-size: 10px; animation: heartFloatMini 0.8s ease-out forwards;
+    }
+    @keyframes heartFloatMini {
+      0% { opacity: 0.8; transform: scale(0.5) translateY(0) rotate(var(--r)); }
+      100% { opacity: 0; transform: scale(0.3) translateY(-35px) rotate(calc(var(--r) + 20deg)); }
+    }
+
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -255,6 +328,8 @@
       .section-desc { margin-bottom: 36px; }
       .skills-grid { grid-template-columns: 1fr; }
       .links-grid { grid-template-columns: 1fr; }
+      .hero-cat { display: none; }
+      .cat-deco.cat-deco-md, .cat-deco.cat-deco-lg { display: none; }
     }
 
     /* Reduced motion */
@@ -262,6 +337,7 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
       .reveal, .timeline-item, .skill-card, .link-card { opacity: 1; transform: none; }
+      .cat-float-1, .cat-float-2, .cat-float-3, .cat-float-4 { animation: none; }
     }
   </style>
 </head>
@@ -270,7 +346,27 @@
   <!-- ====== Navigation ====== -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">Hi<span>.</span></a>
+      <a href="#" class="nav-logo">
+        <!-- Tiny cat face logo -->
+        <svg class="cat-logo" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <!-- ears -->
+          <path d="M20 40L12 15L35 32"/>
+          <path d="M80 40L88 15L65 32"/>
+          <!-- head -->
+          <ellipse cx="50" cy="58" rx="35" ry="32"/>
+          <!-- eyes -->
+          <path d="M37 52c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+          <path d="M52 52c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+          <!-- nose -->
+          <path d="M47 66h6l-3 5z"/>
+          <!-- mouth -->
+          <path d="M43 72c3.5 3 10.5 3 14 0"/>
+          <!-- whiskers -->
+          <line x1="8" y1="58" x2="22" y2="62"/><line x1="6" y1="68" x2="21" y2="68"/><line x1="10" y1="78" x2="23" y2="74"/>
+          <line x1="92" y1="58" x2="78" y2="62"/><line x1="94" y1="68" x2="79" y2="68"/><line x1="90" y1="78" x2="77" y2="74"/>
+        </svg>
+        Hi<span>.</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">关于</a></li>
         <li><a href="#experience">经历</a></li>
@@ -282,11 +378,55 @@
 
   <!-- ====== Hero ====== -->
   <section class="hero">
+    <!-- Big floating cats in hero background -->
+    <div class="hero-cat hero-cat-left">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 38L8 8L34 28"/>
+        <path d="M82 38L92 8L66 28"/>
+        <ellipse cx="50" cy="58" rx="40" ry="36"/>
+        <path d="M33 50c0-4 3.5-7 8-7s8 3 8 7"/>
+        <path d="M51 50c0-4 3.5-7 8-7s8 3 8 7"/>
+        <path d="M46 68h8l-4 6z"/>
+        <path d="M40 75c4 4 16 4 20 0"/>
+        <line x1="5" y1="55" x2="22" y2="60"/><line x1="2" y1="67" x2="20" y2="67"/><line x1="6" y1="79" x2="21" y2="74"/>
+        <line x1="95" y1="55" x2="78" y2="60"/><line x1="98" y1="67" x2="80" y2="67"/><line x1="94" y1="79" x2="79" y2="74"/>
+        <path d="M50 95v-10" stroke-dasharray="2 3"/>
+        <path d="M42 92l8-5 8 5" />
+        <path d="M30 96l10-8" /><path d="M70 96l-10-8" />
+      </svg>
+    </div>
+    <div class="hero-cat hero-cat-right">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 35L14 10L38 27"/>
+        <path d="M78 35L86 10L62 27"/>
+        <ellipse cx="50" cy="56" rx="38" ry="34"/>
+        <path d="M35 48c0-3.5 3-6.5 7-6.5s7 3 7 6.5"/>
+        <path d="M51 48c0-3.5 3-6.5 7-6.5s7 3 7 6.5"/>
+        <circle cx="47" cy="63" r="1.5" fill="#2563EB"/><circle cx="53" cy="63" r="1.5" fill="#2563EB"/>
+        <path d="M41 70c3 3 15 3 18 0"/>
+        <line x1="8" y1="54" x2="23" y2="58"/><line x1="5" y1="65" x2="21" y2="65"/>
+        <line x1="92" y1="54" x2="77" y2="58"/><line x1="95" y1="65" x2="79" y2="65"/>
+        <path d="M50 93v-8" stroke-dasharray="2 3"/>
+        <ellipse cx="35" cy="86" rx="8" ry="4"/><ellipse cx="65" cy="86" rx="8" ry="4"/>
+      </svg>
+    </div>
+
     <div class="hero-content">
       <img src="https://avatars.githubusercontent.com/u/85277305?v=4"
            alt="Hibariying" class="hero-avatar">
       <h1 class="hero-name">Hibariying</h1>
-      <p class="hero-tagline">开发者 &amp; 终身学习者</p>
+      <p class="hero-tagline">
+        开发者 &amp; 终身学习者
+        <svg class="tagline-cat" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 35L12 8L36 28"/><path d="M78 35L88 8L64 28"/>
+          <ellipse cx="50" cy="56" rx="38" ry="34"/>
+          <path d="M35 48c0-3.5 3-6.5 7-6.5s7 3 7 6.5"/>
+          <path d="M51 48c0-3.5 3-6.5 7-6.5s7 3 7 6.5"/>
+          <path d="M47 65h6l-3 5z"/><path d="M41 71c3 3 16 3 19 0"/>
+          <line x1="8" y1="54" x2="23" y2="58"/><line x1="5" y1="65" x2="21" y2="65"/>
+          <line x1="92" y1="54" x2="77" y2="58"/><line x1="95" y1="65" x2="79" y2="65"/>
+        </svg>
+      </p>
       <p class="hero-bio">热爱技术，享受创造。在这里记录成长轨迹，分享学习成果。</p>
       <div class="hero-actions">
         <a href="#about" class="btn btn-primary">
@@ -300,6 +440,11 @@
       </div>
     </div>
     <div class="scroll-hint">
+      <svg class="scroll-hint-cat" viewBox="0 0 100 100" fill="none" stroke="#A1A1AA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M25 32L15 8L39 26"/><path d="M75 32L85 8L61 26"/><ellipse cx="50" cy="54" rx="34" ry="30"/>
+        <path d="M38 47c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 47c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+        <path d="M47 61h6l-3 4z"/><path d="M42 67c2.5 2.5 13.5 2.5 16 0"/>
+      </svg>
       <span>SCROLL</span>
       <div class="scroll-line"></div>
     </div>
@@ -307,32 +452,50 @@
 
   <!-- ====== About ====== -->
   <section id="about" class="about">
+    <!-- Decorative cat -->
+    <svg class="cat-deco cat-deco-md cat-float-1" style="right:4%;top:18%;" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 36L14 10L38 28"/><path d="M76 36L86 10L62 28"/>
+      <ellipse cx="50" cy="56" rx="36" ry="32"/>
+      <path d="M36 48c0-3.5 3-6.5 7-6.5s7 3 7 6.5"/>
+      <path d="M50 48c0-3.5 3-6.5 7-6.5s7 3 7 6.5"/>
+      <path d="M47 64h6l-3 5z"/><path d="M41 70c3 3 16 3 19 0"/>
+      <line x1="8" y1="54" x2="22" y2="59"/><line x1="5" y1="65" x2="20" y2="65"/>
+      <line x1="92" y1="54" x2="78" y2="59"/><line x1="95" y1="65" x2="80" y2="65"/>
+    </svg>
+
     <div class="section-inner">
-      <p class="section-label reveal">About</p>
-      <h2 class="section-title reveal">关于我</h2>
+      <p class="section-label reveal">
+        <svg class="label-cat" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M25 30L15 5L38 24"/><path d="M75 30L85 5L62 24"/><ellipse cx="50" cy="52" rx="35" ry="30"/>
+          <path d="M38 45c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 45c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+          <path d="M47 58h6l-3 4z"/><path d="M42 64c2.5 2.5 13.5 2.5 16 0"/>
+        </svg>
+        About
+      </p>
+      <h2 class="section-title reveal">关于我 🐾</h2>
       <p class="section-desc reveal">一个对世界充满好奇的人，相信技术的力量可以改变生活。</p>
       <div class="about-grid">
         <div class="about-text">
           <p>你好，我是 Hibariying。一名热爱探索的开发者，喜欢把复杂的问题拆解成优雅的解决方案。</p>
           <p>我相信持续学习的力量。无论是编程语言、系统设计还是产品思维，每一步成长都值得被记录。</p>
-          <p>这个网站是我的数字名片，也是我成长的见证。</p>
+          <p>这个网站是我的数字名片，也是我成长的见证。哦对了，我喜欢猫 🐱</p>
         </div>
         <div class="about-stats">
           <div class="stat-card reveal">
             <div class="stat-num">∞</div>
-            <div class="stat-label">好奇心指数</div>
+            <div class="stat-label">好奇心指数 🐱</div>
           </div>
           <div class="stat-card reveal">
             <div class="stat-num">24/7</div>
-            <div class="stat-label">学习模式</div>
+            <div class="stat-label">学习模式 😺</div>
           </div>
           <div class="stat-card reveal">
             <div class="stat-num">100%</div>
-            <div class="stat-label">热情驱动</div>
+            <div class="stat-label">热情驱动 💪</div>
           </div>
           <div class="stat-card reveal">
             <div class="stat-num">Open</div>
-            <div class="stat-label">合作心态</div>
+            <div class="stat-label">合作心态 🤝</div>
           </div>
         </div>
       </div>
@@ -341,15 +504,36 @@
 
   <!-- ====== Experience ====== -->
   <section id="experience" class="experience">
+    <!-- Decorative sleeping cat -->
+    <svg class="cat-deco cat-deco-lg cat-float-2" style="left:3%;bottom:12%;" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M30 30L22 8L42 24"/><path d="M60 30L68 8L48 24"/>
+      <ellipse cx="50" cy="58" rx="34" ry="28"/>
+      <path d="M38 52c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+      <path d="M51 52c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+      <path d="M47 64h6l-3 4z"/>
+      <path d="M42 70c3 2 13 2 16 0"/>
+      <!-- Zzz sleep marks -->
+      <text x="76" y="30" fill="#2563EB" font-size="12" font-family="Arial" stroke="none">z</text>
+      <text x="84" y="22" fill="#2563EB" font-size="9" font-family="Arial" stroke="none">z</text>
+      <text x="89" y="15" fill="#2563EB" font-size="7" font-family="Arial" stroke="none">z</text>
+    </svg>
+
     <div class="section-inner">
-      <p class="section-label reveal">Experience</p>
+      <p class="section-label reveal">
+        <svg class="label-cat" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 32L12 6L36 25"/><path d="M78 32L88 6L64 25"/><ellipse cx="50" cy="54" rx="36" ry="31"/>
+          <path d="M36 47c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 47c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+          <path d="M47 60h6l-3 4z"/><path d="M41 66c2.5 2.5 15.5 2.5 18 0"/>
+        </svg>
+        Experience
+      </p>
       <h2 class="section-title reveal">经历与成长</h2>
       <p class="section-desc reveal">每一步都是新的起点。</p>
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-date">2026 — 现在</div>
-          <h3 class="timeline-title">持续进化中</h3>
+          <h3 class="timeline-title">持续进化中 🐾</h3>
           <p class="timeline-subtitle">全栈开发 & AI 探索</p>
           <p class="timeline-desc">深入探索前后端开发、AI 应用开发，构建实用工具和自动化解决方案。用 AI 辅助日常工作和学习效率提升。</p>
         </div>
@@ -363,7 +547,7 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-date">2021 — 现在</div>
-          <h3 class="timeline-title">开启旅程</h3>
+          <h3 class="timeline-title">开启旅程 🐱</h3>
           <p class="timeline-subtitle">GitHub 注册 & 编程入门</p>
           <p class="timeline-desc">注册 GitHub 账号，正式踏上编程之路。从零开始，一步步积累代码经验，记录每一次学习和实践。</p>
         </div>
@@ -373,8 +557,22 @@
 
   <!-- ====== Skills ====== -->
   <section id="skills" class="skills">
+    <!-- Small cat decoration -->
+    <svg class="cat-deco cat-deco-sm cat-float-3" style="right:5%;top:22%;" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M26 34L16 8L40 26"/><path d="M74 34L84 8L60 26"/><ellipse cx="50" cy="56" rx="34" ry="30"/>
+      <path d="M38 48c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 48c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+      <path d="M47 62h6l-3 4z"/><path d="M42 68c2.5 2.5 13.5 2.5 16 0"/>
+    </svg>
+
     <div class="section-inner">
-      <p class="section-label reveal">Skills & Projects</p>
+      <p class="section-label reveal">
+        <svg class="label-cat" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 33L14 7L38 26"/><path d="M76 33L86 7L62 26"/><ellipse cx="50" cy="55" rx="35" ry="30"/>
+          <path d="M37 48c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 48c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+          <path d="M47 61h6l-3 4z"/><path d="M42 67c2.5 2.5 14.5 2.5 16 0"/>
+        </svg>
+        Skills & Projects
+      </p>
       <h2 class="section-title reveal">技能与成果</h2>
       <p class="section-desc reveal">不断拓展的能力边界。</p>
       <div class="skills-grid">
@@ -424,8 +622,24 @@
 
   <!-- ====== Links ====== -->
   <section id="links" class="links-section">
+    <!-- Cat waving goodbye / hello -->
+    <svg class="cat-deco cat-deco-md cat-float-4" style="left:4%;top:20%;" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M26 34L16 8L40 26"/><path d="M74 34L84 8L60 26"/><ellipse cx="50" cy="56" rx="34" ry="30"/>
+      <path d="M38 48c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 48c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+      <path d="M47 62h6l-3 4z"/><path d="M42 68c2.5 2.5 13.5 2.5 16 0"/>
+      <path d="M82 48c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke-dasharray="2 2"/>
+      <text x="83" y="40" fill="#2563EB" font-size="8" font-family="Arial" stroke="none">hi!</text>
+    </svg>
+
     <div class="section-inner">
-      <p class="section-label reveal">Links</p>
+      <p class="section-label reveal">
+        <svg class="label-cat" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 32L13 6L37 25"/><path d="M77 32L87 6L63 25"/><ellipse cx="50" cy="54" rx="35" ry="30"/>
+          <path d="M37 47c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 47c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+          <path d="M47 60h6l-3 4z"/><path d="M42 66c2.5 2.5 14.5 2.5 16 0"/>
+        </svg>
+        Links
+      </p>
       <h2 class="section-title reveal">链接</h2>
       <p class="section-desc reveal">我在互联网上的足迹。</p>
       <div class="links-grid">
@@ -462,7 +676,16 @@
 
   <!-- ====== Footer ====== -->
   <footer>
-    <p>Crafted with curiosity by <a href="https://github.com/Hibariying" target="_blank" rel="noopener noreferrer">Hibariying</a> &middot; Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a></p>
+    <p>
+      Crafted with
+      <svg class="footer-cat" viewBox="0 0 100 100" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M25 30L15 5L38 24"/><path d="M75 30L85 5L62 24"/><ellipse cx="50" cy="52" rx="35"ry="30"/>
+        <path d="M38 45c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M50 45c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/>
+        <path d="M47 58h6l-3 4z"/><path d="M42 64c2.5 2.5 13.5 2.5 16 0"/>
+      </svg>
+      by <a href="https://github.com/Hibariying" target="_blank" rel="noopener noreferrer">Hibariying</a>
+      &middot; Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+    </p>
   </footer>
 
   <!-- ====== Scroll Reveal Script ====== -->
@@ -474,7 +697,6 @@
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry, index) {
           if (entry.isIntersecting) {
-            // Stagger skill cards and link cards within their parent
             var el = entry.target;
             var siblings = el.parentElement ? el.parentElement.querySelectorAll('.skill-card, .link-card') : [];
             var delay = siblings.length > 1 ? Array.prototype.indexOf.call(siblings, el) * 100 : 0;
@@ -491,11 +713,77 @@
         rootMargin: '0px 0px -40px 0px'
       });
 
-      // Observe elements
       document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
       document.querySelectorAll('.timeline-item').forEach(function(el) { observer.observe(el); });
       document.querySelectorAll('.skill-card').forEach(function(el) { observer.observe(el); });
       document.querySelectorAll('.link-card').forEach(function(el) { observer.observe(el); });
+    })();
+  </script>
+
+  <!-- ====== Heart Click Effect Script ====== -->
+  <script>
+    (function() {
+      var colors = ['#FF6B81', '#FF4757', '#EE5A9A', '#FF69B4', '#FDA7DF', '#f43f5e', '#ec4899'];
+      var heartShapes = [
+        '\u2764\uFE0F',
+        // SVG heart for more variety
+        '<svg style="width:1em;height:1em;vertical-align:middle" viewBox="0 0 24 24" fill="%23FF6B81"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
+      ];
+
+      function createHeart(x, y, isMain) {
+        var heart = document.createElement('div');
+        if (!isMain && Math.random() > 0.5) {
+          heart.innerHTML = heartShapes[1];
+        } else {
+          heart.innerHTML = heartShapes[0];
+        }
+
+        heart.className = isMain ? 'heart-particle' : 'heart-particle heart-mini';
+        heart.style.left = (x + (isMain ? 0 : (Math.random() - 0.5) * 40)) + 'px';
+        heart.style.top = (y + (isMain ? 0 : (Math.random() - 0.5) * 30)) + 'px';
+
+        if (!isMain) {
+          heart.style.setProperty('--r', ((Math.random() - 0.5) * 60) + 'deg');
+        }
+
+        var colorIdx = Math.floor(Math.random() * colors.length);
+        heart.style.color = colors[colorIdx];
+        heart.style.filter = 'drop-shadow(0 0 6px ' + colors[colorIdx] + '60)';
+        heart.style.fontSize = isMain ? (14 + Math.random() * 10) + 'px' : (8 + Math.random() * 6) + 'px';
+
+        document.body.appendChild(heart);
+
+        setTimeout(function() {
+          if (heart.parentNode) heart.parentNode.removeChild(heart);
+        }, 1100);
+      }
+
+      document.addEventListener('click', function(e) {
+        // Main heart
+        createHeart(e.clientX, e.clientY, true);
+
+        // Mini hearts burst (2-4)
+        var count = 2 + Math.floor(Math.random() * 3);
+        for (var i = 0; i < count; i++) {
+          setTimeout((function(idx) {
+            return function() { createHeart(e.clientX, e.clientY, false); };
+          })(i), i * 50);
+        }
+      });
+
+      // Touch support
+      document.addEventListener('touchend', function(e) {
+        if (e.changedTouches.length > 0) {
+          var touch = e.changedTouches[0];
+          createHeart(touch.clientX, touch.clientY, true);
+          var count = 2 + Math.floor(Math.random() * 3);
+          for (var i = 0; i < count; i++) {
+            setTimeout((function(idx) {
+              return function() { createHeart(touch.clientX, touch.clientY, false); };
+            })(i), i * 50);
+          }
+        }
+      }, { passive: true });
     })();
   </script>
 </body>
