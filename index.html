@@ -4,96 +4,499 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hibariying</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ========== Reset & Base ========== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FAFAFA;
+      color: #09090B;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    .container {
-      background: #fff;
-      border-radius: 20px;
-      padding: 48px 40px;
-      text-align: center;
-      max-width: 420px;
-      width: 90%;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+    /* ========== Typography ========== */
+    h1, h2, h3 { font-family: 'Archivo', sans-serif; font-weight: 600; letter-spacing: -0.02em; }
+
+    /* ========== Navigation ========== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #fff;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
     }
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #1a1a2e;
+    .nav-logo {
+      font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 700;
+      color: #09090B; text-decoration: none; letter-spacing: -0.03em;
     }
-    .bio {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 24px;
-      line-height: 1.5;
+    .nav-logo span { color: #2563EB; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: #52525B;
+      text-decoration: none; transition: color 0.2s ease; cursor: pointer;
     }
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .nav-links a:hover { color: #2563EB; }
+
+    /* ========== Hero ========== */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px; position: relative;
+      overflow: hidden;
     }
-    .link-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px 20px;
-      background: #f8f9fa;
-      border-radius: 12px;
-      text-decoration: none;
-      color: #333;
-      font-size: 15px;
-      font-weight: 500;
-      transition: all 0.2s ease;
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .link-item:hover {
-      background: #667eea;
-      color: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    .hero-content { position: relative; z-index: 1; max-width: 640px; }
+    .hero-avatar {
+      width: 112px; height: 112px; border-radius: 50%;
+      object-fit: cover; margin-bottom: 28px;
+      border: 2px solid rgba(37, 99, 235, 0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      opacity: 0; animation: fadeUp 0.7s ease forwards;
     }
-    .link-item svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
+    .hero-avatar:hover {
+      transform: scale(1.05); box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
     }
-    .footer {
-      margin-top: 32px;
-      font-size: 13px;
-      color: #aaa;
+    .hero-name {
+      font-size: clamp(36px, 6vw, 56px); line-height: 1.1; margin-bottom: 12px;
+      opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+    .hero-tagline {
+      font-size: clamp(17px, 2.5vw, 21px); font-weight: 300;
+      color: #52525B; margin-bottom: 10px; letter-spacing: -0.01em;
+      opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+    .hero-bio {
+      font-size: 15px; color: #71717A; max-width: 480px; margin: 0 auto 36px;
+      opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px;
+      border-radius: 12px; font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: all 0.25s ease; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: #18181B; color: #fff;
+      box-shadow: 0 2px 12px rgba(24, 24, 27, 0.15);
+    }
+    .btn-primary:hover { background: #27272A; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(24, 24, 27, 0.22); }
+    .btn-secondary {
+      background: transparent; color: #3F3F46;
+      border: 1px solid #E4E4E7;
+    }
+    .btn-secondary:hover { border-color: #2563EB; color: #2563EB; transform: translateY(-2px); }
+    .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+    .scroll-hint {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: #A1A1AA; font-size: 12px; letter-spacing: 0.08em;
+      opacity: 0; animation: fadeIn 0.6s ease 0.8s forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 36px; background: linear-gradient(to bottom, #D4D4D8, transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ========== Sections Common ========== */
+    section { padding: 96px 24px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.15em; color: #2563EB; margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; color: #18181B;
+    }
+    .section-desc { font-size: 16px; color: #71717A; max-width: 520px; margin-bottom: 48px; line-height: 1.65; }
+
+    /* ========== About ========== */
+    .about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .about-text p { font-size: 15px; color: #3F3F46; margin-bottom: 18px; line-height: 1.75; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stat-card {
+      background: #FAFAFA; border: 1px solid #F4F4F5; border-radius: 16px;
+      padding: 24px; text-align: center; transition: all 0.25s ease; cursor: default;
+    }
+    .stat-card:hover { border-color: #E4E4E7; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); transform: translateY(-2px); }
+    .stat-num { font-family: 'Archivo', sans-serif; font-size: 32px; font-weight: 700; color: #18181B; }
+    .stat-label { font-size: 13px; color: #A1A1AA; margin-top: 4px; }
+
+    /* ========== Experience / Timeline ========== */
+    .experience { background: #FAFAFA; }
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 9px; top: 8px; bottom: 8px;
+      width: 1px; background: linear-gradient(to bottom, #2563EB, #E4E4E7);
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 40px; padding-left: 24px;
+      opacity: 0; transform: translateX(-16px); transition: all 0.55s cubic-bezier(.22, 1, .36, 1);
+    }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -23px; top: 6px; width: 11px; height: 11px;
+      border-radius: 50%; background: #fff; border: 2px solid #2563EB;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+    }
+    .timeline-item.visible .timeline-dot { background: #2563EB; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12); }
+    .timeline-date {
+      font-size: 12px; font-weight: 600; color: #2563EB;
+      letter-spacing: 0.03em; margin-bottom: 6px;
+    }
+    .timeline-title { font-size: 17px; font-weight: 600; color: #18181B; margin-bottom: 4px; }
+    .timeline-subtitle { font-size: 14px; color: #71717A; margin-bottom: 8px; }
+    .timeline-desc { font-size: 14px; color: #52525B; line-height: 1.65; }
+
+    /* ========== Skills / Achievements ========== */
+    .skills { background: #fff; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: #FAFAFA; border: 1px solid #F4F4F5; border-radius: 16px;
+      padding: 28px 24px; transition: all 0.28s ease; cursor: default;
+      opacity: 0; transform: translateY(20px);
+    }
+    .skill-card.visible { opacity: 1; transform: translateY(0); }
+    .skill-card:hover {
+      border-color: #D4D4D8; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      transform: translateY(-4px);
+    }
+    .skill-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; color: #2563EB;
+    }
+    .skill-icon svg { width: 22px; height: 22px; }
+    .skill-card h3 { font-size: 16px; margin-bottom: 8px; color: #18181B; }
+    .skill-card p { font-size: 14px; color: #71717A; line-height: 1.6; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .skill-tags span {
+      font-size: 12px; padding: 4px 10px; border-radius: 6px;
+      background: #F4F4F5; color: #52525B; font-weight: 500;
+    }
+
+    /* ========== Links ========== */
+    .links-section { background: #FAFAFA; }
+    .links-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+    }
+    .link-card {
+      display: flex; align-items: center; gap: 16px;
+      background: #fff; border: 1px solid #E4E4E7; border-radius: 14px;
+      padding: 20px 24px; text-decoration: none; color: inherit;
+      transition: all 0.25s ease; cursor: pointer;
+      opacity: 0; transform: translateY(16px);
+    }
+    .link-card.visible { opacity: 1; transform: translateY(0); }
+    .link-card:hover {
+      border-color: #2563EB; box-shadow: 0 6px 24px rgba(37, 99, 235, 0.1);
+      transform: translateY(-3px);
+    }
+    .link-card-icon {
+      width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #F4F4F5; color: #3F3F46; transition: all 0.25s ease;
+    }
+    .link-card-icon svg { width: 22px; height: 22px; }
+    .link-card:hover .link-card-icon { background: #2563EB; color: #fff; }
+    .link-card-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+    .link-card-info p { font-size: 13px; color: #A1A1AA; }
+
+    /* ========== Footer ========== */
+    footer {
+      text-align: center; padding: 40px 24px;
+      border-top: 1px solid #F4F4F5; color: #A1A1AA; font-size: 13px;
+    }
+    footer a { color: #71717A; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #2563EB; }
+
+    /* ========== Animations ========== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* Scroll reveal base */
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(.22, 1, .36, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-stats { order: -1; }
+      section { padding: 64px 20px; }
+      .section-desc { margin-bottom: 36px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .links-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .reveal, .timeline-item, .skill-card, .link-card { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://avatars.githubusercontent.com/u/85277305?v=4" alt="Hibariying" class="avatar">
-    <h1>Hibariying</h1>
-    <p class="bio">Hi ~</p>
-    <div class="links">
-      <a href="https://github.com/Hibariying" class="link-item" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        GitHub
-      </a>
+
+  <!-- ====== Navigation ====== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Hi<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#experience">经历</a></li>
+        <li><a href="#skills">技能</a></li>
+        <li><a href="#links">链接</a></li>
+      </ul>
     </div>
-    <p class="footer">Powered by GitHub Pages</p>
-  </div>
+  </nav>
+
+  <!-- ====== Hero ====== -->
+  <section class="hero">
+    <div class="hero-content">
+      <img src="https://avatars.githubusercontent.com/u/85277305?v=4"
+           alt="Hibariying" class="hero-avatar">
+      <h1 class="hero-name">Hibariying</h1>
+      <p class="hero-tagline">开发者 &amp; 终身学习者</p>
+      <p class="hero-bio">热爱技术，享受创造。在这里记录成长轨迹，分享学习成果。</p>
+      <div class="hero-actions">
+        <a href="#about" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          了解更多
+        </a>
+        <a href="https://github.com/Hibariying" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ====== About ====== -->
+  <section id="about" class="about">
+    <div class="section-inner">
+      <p class="section-label reveal">About</p>
+      <h2 class="section-title reveal">关于我</h2>
+      <p class="section-desc reveal">一个对世界充满好奇的人，相信技术的力量可以改变生活。</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>你好，我是 Hibariying。一名热爱探索的开发者，喜欢把复杂的问题拆解成优雅的解决方案。</p>
+          <p>我相信持续学习的力量。无论是编程语言、系统设计还是产品思维，每一步成长都值得被记录。</p>
+          <p>这个网站是我的数字名片，也是我成长的见证。</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card reveal">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">好奇心指数</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">学习模式</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">热情驱动</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-num">Open</div>
+            <div class="stat-label">合作心态</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Experience ====== -->
+  <section id="experience" class="experience">
+    <div class="section-inner">
+      <p class="section-label reveal">Experience</p>
+      <h2 class="section-title reveal">经历与成长</h2>
+      <p class="section-desc reveal">每一步都是新的起点。</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2026 — 现在</div>
+          <h3 class="timeline-title">持续进化中</h3>
+          <p class="timeline-subtitle">全栈开发 & AI 探索</p>
+          <p class="timeline-desc">深入探索前后端开发、AI 应用开发，构建实用工具和自动化解决方案。用 AI 辅助日常工作和学习效率提升。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2025 — 2026</div>
+          <h3 class="timeline-title">技术积累期</h3>
+          <p class="timeline-subtitle">Web 开发 & 自动化工具</p>
+          <p class="timeline-desc">专注于 Web 技术栈的深入学习，从静态页面到动态应用，逐步建立完整的技术体系。开始使用 AI 工具提升开发效率。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2021 — 现在</div>
+          <h3 class="timeline-title">开启旅程</h3>
+          <p class="timeline-subtitle">GitHub 注册 & 编程入门</p>
+          <p class="timeline-desc">注册 GitHub 账号，正式踏上编程之路。从零开始，一步步积累代码经验，记录每一次学习和实践。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Skills ====== -->
+  <section id="skills" class="skills">
+    <div class="section-inner">
+      <p class="section-label reveal">Skills & Projects</p>
+      <h2 class="section-title reveal">技能与成果</h2>
+      <p class="section-desc reveal">不断拓展的能力边界。</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Web 开发</h3>
+          <p>前端到后端的完整链路能力，能够独立完成 Web 应用从设计到部署的全流程。</p>
+          <div class="skill-tags">
+            <span>HTML/CSS</span><span>JavaScript</span><span>React</span><span>Node.js</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3>AI 工具应用</h3>
+          <p>熟练运用 AI 工具辅助开发和日常工作，善于将 AI 能力融入实际工作流中。</p>
+          <div class="skill-tags">
+            <span>Prompt Engineering</span><span>AI Agent</span><span>自动化</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>DevOps & 部署</h3>
+          <p>掌握 Git 版本控制及 CI/CD 基本流程，能够将项目部署到各类平台。</p>
+          <div class="skill-tags">
+            <span>Git</span><span>GitHub Pages</span><span>VPS</span><span>Docker</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3>持续学习</h3>
+          <p>保持对新技术的敏感度，通过阅读文档、动手实践、参与项目来不断提升自己。</p>
+          <div class="skill-tags">
+            <span>英语阅读</span><span>文档能力</span><span>问题解决</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Links ====== -->
+  <section id="links" class="links-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Links</p>
+      <h2 class="section-title reveal">链接</h2>
+      <p class="section-desc reveal">我在互联网上的足迹。</p>
+      <div class="links-grid">
+        <a href="https://github.com/Hibariying" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          </div>
+          <div class="link-card-info">
+            <h3>GitHub</h3>
+            <p>@Hibariying · 代码仓库与项目</p>
+          </div>
+        </a>
+        <a href="https://hibariying.github.io" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div class="link-card-info">
+            <h3>个人主页</h3>
+            <p>hibariying.github.io · 你正在这里</p>
+          </div>
+        </a>
+        <a href="mailto:85277305+Hibariying@users.noreply.github.com" class="link-card">
+          <div class="link-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+          </div>
+          <div class="link-card-info">
+            <h3>Email</h3>
+            <p>通过 GitHub 联系我</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Footer ====== -->
+  <footer>
+    <p>Crafted with curiosity by <a href="https://github.com/Hibariying" target="_blank" rel="noopener noreferrer">Hibariying</a> &middot; Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a></p>
+  </footer>
+
+  <!-- ====== Scroll Reveal Script ====== -->
+  <script>
+    (function() {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, index) {
+          if (entry.isIntersecting) {
+            // Stagger skill cards and link cards within their parent
+            var el = entry.target;
+            var siblings = el.parentElement ? el.parentElement.querySelectorAll('.skill-card, .link-card') : [];
+            var delay = siblings.length > 1 ? Array.prototype.indexOf.call(siblings, el) * 100 : 0;
+
+            setTimeout(function() {
+              el.classList.add('visible');
+            }, delay);
+
+            observer.unobserve(el);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      // Observe elements
+      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+      document.querySelectorAll('.timeline-item').forEach(function(el) { observer.observe(el); });
+      document.querySelectorAll('.skill-card').forEach(function(el) { observer.observe(el); });
+      document.querySelectorAll('.link-card').forEach(function(el) { observer.observe(el); });
+    })();
+  </script>
 </body>
 </html>
